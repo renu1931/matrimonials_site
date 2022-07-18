@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import black from "../public/Images/black.svg";
@@ -22,6 +22,7 @@ import boy_3 from "../public/Images/boy_3.jpg";
 import boy_4 from "../public/Images/boy_4.jpg";
 import boy_5 from "../public/Images/boy_5.jpg";
 import agar_matromonial from "../public/Images/agar_matromonial.webp";
+import { useForm } from "react-hook-form";
 
 export default function SeachInfo() {
   const [view1, setView1] = useState(false);
@@ -34,6 +35,7 @@ export default function SeachInfo() {
   const [view8, setView8] = useState(false);
   const [view9, setView9] = useState(false);
   const [view10, setView10] = useState(false);
+
   function viewProfile1() {
     setView1(!view1);
   }
@@ -64,6 +66,50 @@ export default function SeachInfo() {
   function viewProfile10() {
     setView10(!view10);
   }
+
+  const [inputs, setInputs] = useState({});
+  const [formError, setFormError] = useState({});
+  const handleChange = (event) => {
+    event.preventDefault();
+    setInputs((inputs) => ({
+      ...inputs,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  console.log("bvdshjbvgfsdhj====>", inputs);
+  const formSubmit = () => {
+    setInputs({
+      profile: "",
+      gender: "",
+      name: "",
+      mobile: "",
+    });
+    localStorage.setItem("inputs", JSON.stringify(inputs));
+    setFormError(inputs);
+  };
+
+  const { register, handleSubmit, errors } = useForm();
+  console.log(errors);
+  const onSubmit = (data) => console.log(data);
+  // const validate = (values) => {
+  //   const errors = {};
+  //   if (!values.profile) {
+  //     errors.profile = "Profile is required";
+  //   } else if (values === profile) {
+  //     errors.profile = "";
+  //   }
+  //   if (!values.name) {
+  //     errors.name = "Name is required";
+  //   }
+  //   if (!values.mobile) {
+  //     errors.mobile = "Mobile is required";
+  //   }
+
+  //   console.log(" error =======>", errors);
+  //   return errors;
+  // };
+
   return (
     <>
       {/*photos section start */}
@@ -222,133 +268,178 @@ export default function SeachInfo() {
                   <div className="container" id="bride1-container">
                     <div className="row">
                       <div className="col-md-12 pl-5">
-                        <div className="row mb-5 mt-2">
-                          <Image
-                            src={girl_1}
-                            alt="bride1-image"
-                            height={80}
-                            width={80}
-                          />
-                          <p onClick={viewProfile1}>
-                            <i
-                              className="fa-solid fa-xmark"
-                              id="bride1-cross"
-                            ></i>
-                          </p>
-                          <div className="col-md-8">
-                            <h5 id="bride1-h5">
-                              Join Us and view her profile now!
-                            </h5>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                          <div className="row mb-5 mt-2">
+                            <Image
+                              src={girl_1}
+                              alt="bride1-image"
+                              height={80}
+                              width={80}
+                            />
+                            <p onClick={viewProfile1}>
+                              <i
+                                className="fa-solid fa-xmark"
+                                id="bride1-cross"
+                              ></i>
+                            </p>
 
-                            <div className="d-flex justify-content-end">
-                              <p id="bride1-p">Already a member?</p>
-                              <button id="bride1-btn">Log In</button>
+                            <div className="col-md-8">
+                              <h5 id="bride1-h5">
+                                Join Us and view her profile now!
+                              </h5>
+
+                              <div className="d-flex justify-content-end">
+                                <p id="bride1-p">Already a member?</p>
+                                <button id="bride1-btn">Log In</button>
+                              </div>
                             </div>
                           </div>
-                        </div>
 
-                        <input
-                          type="text"
-                          placeholder="Profile Created By"
-                          id="bride1-input"
-                        />
-                        <br />
-                        <span>Select Gender</span>
-                        <br />
-                        <div className="d-flex" id="bride1-radio">
-                          <p>
-                            <input
-                              type="radio"
-                              id="html"
-                              name="fav_language"
-                              value="HTML"
-                            />
-                              <label className="pr-3">Male</label>
-                            <br /> 
-                          </p>
-                          <p>
-                            <input
-                              type="radio"
-                              id="css"
-                              name="fav_language"
-                              value="CSS"
-                            />
-                              <label>Female</label>
-                          </p>
-                        </div>
-                        <input
-                          type="text"
-                          placeholder="Name"
-                          id="bride1-input"
-                        />
-                        <br />
-                        <span>Code</span>
-                        <br />
-                        <select id="bride1-select">
-                          <option>+91 (India)</option>
-                          <option>+1 (United States of America)</option>
-                          <option>+971 (United Arab of Emirates)</option>
-                          <option>+60 (Malaysia)</option>
-                          <option>+61 (Australia)</option>
-                          <option>+966 (Saudi Arabia)</option>
-                          <option>+1 (Canada)</option>
-                          <option>+65 (Singapore)</option>
-                          <option>+965 (Kuwait)</option>
-                          <option>+93 (Afganistan)</option>
-                          <option>+355 (Albania)</option>
-                          <option>+213 (Algeria)</option>
-                          <option>+684 (American Samoa)</option>
-                          <option>+376 (Andorra)</option>
-                          <option>+244 (Angola)</option>
-                          <option>+1264 (Anguilla)</option>
-                          <option>+1 (Antartica)</option>
-                          <option>+1268 (Antigua and Barb8uda)</option>
-                          <option>+54 (Argentina)</option>
-                          <option>+374 (Armenia)</option>
-                          <option>+297 (Aruba)</option>
-                          <option>+61 (Australia)</option>
-                          <option>+43 (Austria)</option>
-                          <option>+994 (Ajerbaijan)</option>
-                          <option>+973 (Bahrain)</option>
-                          <option>+880 (Bangladesh)</option>
-                          <option>+885 (Cambodia)</option>
-                          <option>+235 (Chad)</option>
-                          <option>+45 (Denmark)</option>
-                          <option>+20 (Egypt)</option>
-                          <option>+679 (Fiji)</option>
-                          <option>+33 (France)</option>
-                          <option>+241 (Gabon)</option>
-                          <option>+852 (Hong Kong)</option>
-                          <option>+354 (Iceland)</option>
-                          <option>+98 (Iran)</option>
-                          <option>+81 (Japan)</option>
-                          <option>+218 (Libya)</option>
-                          <option>+223 (Mali)</option>
-                          <option>+356 (Malta)</option>
-                          <option>+977 (Nepal)</option>
-                          <option>+92 (Pakistan)</option>
-                          <option>+7 (Russia)</option>
-                          <option>+685 (Samoa)</option>
-                          <option>+228 (Togo)</option>
-                          <option>+678 (Vanuatu)</option>
-                        </select>
-                        <input
-                          type="number"
-                          placeholder="Enter Mobile Number"
-                          id="bride1-input1"
-                        />
+                          <input
+                            type="text"
+                            placeholder="Profile Created By"
+                            id="bride1-input"
+                            onChange={handleChange}
+                            value={inputs.profile}
+                            name="profile"
+                            {...register("profile", { required: true })}
+                          />
 
-                        <p id="bride1-p">
-                          By clicking Register Now, you agree to our
+                          <small
+                            style={{
+                              color: "red",
+                              fontSize: "12px",
+                            }}
+                          ></small>
+
                           <br />
-                          <span id="bride1-span1">Terms & Conditions </span> and
-                          <span id="bride1-span1">privacy policy</span>
-                        </p>
-                        <Link href="/Agarwal20">
-                          <div className="text-center">
-                            <button id="bride1-btn1">Join Now</button>
+                          <span>Select Gender</span>
+                          <br />
+                          <div className="d-flex" id="bride1-radio mb-2">
+                            <p>
+                              <input type="radio" id="html" name="gender" /> 
+                              <label
+                                className="pr-3"
+                                name="gender"
+                                {...register("gender", { required: true })}
+                              >
+                                Male
+                              </label>
+                            </p>
+                            <p>
+                              <input type="radio" id="css" name="gender" /> 
+                              <label
+                                name="gender"
+                                {...register("gender", { required: true })}
+                              >
+                                Female
+                              </label>
+                            </p>
                           </div>
-                        </Link>
+
+                          <input
+                            type="text"
+                            placeholder="Name"
+                            id="bride1-input"
+                            name="name"
+                            onChange={handleChange}
+                            value={inputs.name}
+                            {...register({ required: true })}
+                          />
+                          <br />
+                          <span
+                            style={{
+                              color: "red",
+                              fontSize: "12px",
+                            }}
+                          ></span>
+                          <br />
+                          <span>Code</span>
+                          <br />
+                          <select id="bride1-select">
+                            <option>+91 (India)</option>
+                            <option>+1 (United States of America)</option>
+                            <option>+971 (United Arab of Emirates)</option>
+                            <option>+60 (Malaysia)</option>
+                            <option>+61 (Australia)</option>
+                            <option>+966 (Saudi Arabia)</option>
+                            <option>+1 (Canada)</option>
+                            <option>+65 (Singapore)</option>
+                            <option>+965 (Kuwait)</option>
+                            <option>+93 (Afganistan)</option>
+                            <option>+355 (Albania)</option>
+                            <option>+213 (Algeria)</option>
+                            <option>+684 (American Samoa)</option>
+                            <option>+376 (Andorra)</option>
+                            <option>+244 (Angola)</option>
+                            <option>+1264 (Anguilla)</option>
+                            <option>+1 (Antartica)</option>
+                            <option>+1268 (Antigua and Barb8uda)</option>
+                            <option>+54 (Argentina)</option>
+                            <option>+374 (Armenia)</option>
+                            <option>+297 (Aruba)</option>
+                            <option>+61 (Australia)</option>
+                            <option>+43 (Austria)</option>
+                            <option>+994 (Ajerbaijan)</option>
+                            <option>+973 (Bahrain)</option>
+                            <option>+880 (Bangladesh)</option>
+                            <option>+885 (Cambodia)</option>
+                            <option>+235 (Chad)</option>
+                            <option>+45 (Denmark)</option>
+                            <option>+20 (Egypt)</option>
+                            <option>+679 (Fiji)</option>
+                            <option>+33 (France)</option>
+                            <option>+241 (Gabon)</option>
+                            <option>+852 (Hong Kong)</option>
+                            <option>+354 (Iceland)</option>
+                            <option>+98 (Iran)</option>
+                            <option>+81 (Japan)</option>
+                            <option>+218 (Libya)</option>
+                            <option>+223 (Mali)</option>
+                            <option>+356 (Malta)</option>
+                            <option>+977 (Nepal)</option>
+                            <option>+92 (Pakistan)</option>
+                            <option>+7 (Russia)</option>
+                            <option>+685 (Samoa)</option>
+                            <option>+228 (Togo)</option>
+                            <option>+678 (Vanuatu)</option>
+                          </select>
+                          <input
+                            placeholder="Enter Mobile Number"
+                            id="bride1-input1"
+                            maxLength={10}
+                            name="mobile"
+                            onChange={handleChange}
+                            value={inputs.mobile}
+                            {...register("mobile", { required: true })}
+                          />
+                          <br />
+                          <span
+                            style={{
+                              color: "red",
+                              fontSize: "12px",
+                            }}
+                          ></span>
+
+                          <p id="bride1-p">
+                            By clicking Register Now, you agree to our
+                            <br />
+                            <span id="bride1-span1">Terms & Conditions</span>
+                            and
+                            <span id="bride1-span1">privacy policy</span>
+                          </p>
+                          <Link href="/Agarwal20">
+                            <div className="text-center">
+                              <button
+                                id="bride1-btn1"
+                                type="submit"
+                                onClick={formSubmit}
+                              >
+                                Join Now
+                              </button>
+                            </div>
+                          </Link>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -408,35 +499,30 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Profile Created By"
                           id="bride1-input"
+                          onChange={handleChange}
+                          value={inputs.profile}
                         />
                         <br />
                         <span>Select Gender</span>
                         <br />
                         <div className="d-flex" id="bride1-radio">
                           <p>
-                            <input
-                              type="radio"
-                              id="html"
-                              name="fav_language"
-                              value="HTML"
-                            />
+                            <input type="radio" id="html" name="fav_language" />
                               <label className="pr-3">Male</label>
                             <br /> 
                           </p>
                           <p>
-                            <input
-                              type="radio"
-                              id="css"
-                              name="fav_language"
-                              value="CSS"
-                            />
-                              <label>Female</label>
+                            <input type="radio" id="css" name="fav_language" /> {" "}
+                            <label>Female</label>
                           </p>
                         </div>
                         <input
                           type="text"
                           placeholder="Name"
                           id="bride1-input"
+                          name="name"
+                          onChange={handleChange}
+                          value={inputs.name}
                         />
                         <br />
                         <span>Code</span>
@@ -493,17 +579,25 @@ export default function SeachInfo() {
                           type="number"
                           placeholder="Enter Mobile Number"
                           id="bride1-input1"
+                          maxLength={10}
+                          name="mobile"
+                          onChange={handleChange}
+                          value={inputs.mobile}
                         />
 
                         <p id="bride1-p">
                           By clicking Register Now, you agree to our
                           <br />
-                          <span id="bride1-span1">Terms & Conditions </span> and
+                          <span id="bride1-span1">Terms & Conditions</span>
+                          and
                           <span id="bride1-span1">privacy policy</span>
                         </p>
+
                         <Link href="/Agarwal20">
                           <div className="text-center">
-                            <button id="bride1-btn1">Join Now</button>
+                            <button id="bride1-btn1" onClick={formSubmit}>
+                              Join Now
+                            </button>
                           </div>
                         </Link>
                       </div>
@@ -565,35 +659,30 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Profile Created By"
                           id="bride1-input"
+                          onChange={handleChange}
+                          value={inputs.profile}
                         />
                         <br />
                         <span>Select Gender</span>
                         <br />
                         <div className="d-flex" id="bride1-radio">
                           <p>
-                            <input
-                              type="radio"
-                              id="html"
-                              name="fav_language"
-                              value="HTML"
-                            />
+                            <input type="radio" id="html" name="fav_language" />
                               <label className="pr-3">Male</label>
                             <br /> 
                           </p>
                           <p>
-                            <input
-                              type="radio"
-                              id="css"
-                              name="fav_language"
-                              value="CSS"
-                            />
-                              <label>Female</label>
+                            <input type="radio" id="css" name="fav_language" /> {" "}
+                            <label>Female</label>
                           </p>
                         </div>
                         <input
                           type="text"
                           placeholder="Name"
                           id="bride1-input"
+                          name="name"
+                          onChange={handleChange}
+                          value={inputs.name}
                         />
                         <br />
                         <span>Code</span>
@@ -650,17 +739,25 @@ export default function SeachInfo() {
                           type="number"
                           placeholder="Enter Mobile Number"
                           id="bride1-input1"
+                          maxLength={10}
+                          name="name"
+                          onChange={handleChange}
+                          value={inputs.mobile}
                         />
 
                         <p id="bride1-p">
                           By clicking Register Now, you agree to our
                           <br />
-                          <span id="bride1-span1">Terms & Conditions </span> and
+                          <span id="bride1-span1">Terms & Conditions</span>
+                          and
                           <span id="bride1-span1">privacy policy</span>
                         </p>
+
                         <Link href="/Agarwal20">
                           <div className="text-center">
-                            <button id="bride1-btn1">Join Now</button>
+                            <button id="bride1-btn1" onClick={formSubmit}>
+                              Join Now
+                            </button>
                           </div>
                         </Link>
                       </div>
@@ -722,35 +819,31 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Profile Created By"
                           id="bride1-input"
+                          name="profile"
+                          onChange={handleChange}
+                          value={inputs.profile}
                         />
                         <br />
                         <span>Select Gender</span>
                         <br />
                         <div className="d-flex" id="bride1-radio">
                           <p>
-                            <input
-                              type="radio"
-                              id="html"
-                              name="fav_language"
-                              value="HTML"
-                            />
+                            <input type="radio" id="html" name="fav_language" />
                               <label className="pr-3">Male</label>
                             <br /> 
                           </p>
                           <p>
-                            <input
-                              type="radio"
-                              id="css"
-                              name="fav_language"
-                              value="CSS"
-                            />
-                              <label>Female</label>
+                            <input type="radio" id="css" name="fav_language" /> {" "}
+                            <label>Female</label>
                           </p>
                         </div>
                         <input
                           type="text"
                           placeholder="Name"
                           id="bride1-input"
+                          name="name"
+                          onChange={handleChange}
+                          value={inputs.name}
                         />
                         <br />
                         <span>Code</span>
@@ -807,17 +900,25 @@ export default function SeachInfo() {
                           type="number"
                           placeholder="Enter Mobile Number"
                           id="bride1-input1"
+                          maxLength={10}
+                          name="mobile"
+                          onChange={handleChange}
+                          value={inputs.mobile}
                         />
 
                         <p id="bride1-p">
                           By clicking Register Now, you agree to our
                           <br />
-                          <span id="bride1-span1">Terms & Conditions </span> and
+                          <span id="bride1-span1">Terms & Conditions</span>
+                          and
                           <span id="bride1-span1">privacy policy</span>
                         </p>
+
                         <Link href="/Agarwal20">
                           <div className="text-center">
-                            <button id="bride1-btn1">Join Now</button>
+                            <button id="bride1-btn1" onClick={formSubmit}>
+                              Join Now
+                            </button>
                           </div>
                         </Link>
                       </div>
@@ -878,32 +979,32 @@ export default function SeachInfo() {
                       type="text"
                       placeholder="Profile Created By"
                       id="bride1-input"
+                      name="profile"
+                      onChange={handleChange}
+                      value={inputs.profile}
                     />
                     <br />
                     <span>Select Gender</span>
                     <br />
                     <div className="d-flex" id="bride1-radio">
                       <p>
-                        <input
-                          type="radio"
-                          id="html"
-                          name="fav_language"
-                          value="HTML"
-                        />
-                          <label className="pr-3">Male</label>
+                        <input type="radio" id="html" name="fav_language" /> 
+                        <label className="pr-3">Male</label>
                         <br /> 
                       </p>
                       <p>
-                        <input
-                          type="radio"
-                          id="css"
-                          name="fav_language"
-                          value="CSS"
-                        />
-                          <label>Female</label>
+                        <input type="radio" id="css" name="fav_language" /> 
+                        <label>Female</label>
                       </p>
                     </div>
-                    <input type="text" placeholder="Name" id="bride1-input" />
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      id="bride1-input"
+                      name="name"
+                      onChange={handleChange}
+                      value={inputs.name}
+                    />
                     <br />
                     <span>Code</span>
                     <br />
@@ -959,6 +1060,10 @@ export default function SeachInfo() {
                       type="number"
                       placeholder="Enter Mobile Number"
                       id="bride1-input1"
+                      maxLength={10}
+                      name="mobile"
+                      onChange={handleChange}
+                      value={inputs.mobile}
                     />
 
                     <p id="bride1-p">
@@ -967,9 +1072,12 @@ export default function SeachInfo() {
                       <span id="bride1-span1">Terms & Conditions </span> and
                       <span id="bride1-span1">privacy policy</span>
                     </p>
+
                     <Link href="/Agarwal20">
                       <div className="text-center">
-                        <button id="bride1-btn1">Join Now</button>
+                        <button id="bride1-btn1" onClick={formSubmit}>
+                          Join Now
+                        </button>
                       </div>
                     </Link>
                   </div>
@@ -1038,6 +1146,9 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Profile Created By"
                           id="bride1-input"
+                          name="profile"
+                          onChange={handleChange}
+                          value={inputs.profile}
                         />
                         <br />
                         <span>Select Gender</span>
@@ -1067,6 +1178,9 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Name"
                           id="bride1-input"
+                          name="name"
+                          onChange={handleChange}
+                          value={inputs.name}
                         />
                         <br />
                         <span>Code</span>
@@ -1123,17 +1237,24 @@ export default function SeachInfo() {
                           type="number"
                           placeholder="Enter Mobile Number"
                           id="bride1-input1"
+                          maxLength={10}
+                          name="mobile"
+                          onChange={handleChange}
+                          value={inputs.mobile}
                         />
 
                         <p id="bride1-p">
                           By clicking Register Now, you agree to our
                           <br />
-                          <span id="bride1-span1">Terms & Conditions </span> and
+                          <span id="bride1-span1">Terms & Conditions</span>
+                          and
                           <span id="bride1-span1">privacy policy</span>
                         </p>
                         <Link href="/Agarwal20">
                           <div className="text-center">
-                            <button id="bride1-btn1">Join Now</button>
+                            <button id="bride1-btn1" onClick={formSubmit}>
+                              Join Now
+                            </button>
                           </div>
                         </Link>
                       </div>
@@ -1195,6 +1316,9 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Profile Created By"
                           id="bride1-input"
+                          name="profile"
+                          onChange={handleChange}
+                          value={inputs.profile}
                         />
                         <br />
                         <span>Select Gender</span>
@@ -1224,6 +1348,9 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Name"
                           id="bride1-input"
+                          name="name"
+                          onChange={handleChange}
+                          value={inputs.name}
                         />
                         <br />
                         <span>Code</span>
@@ -1280,6 +1407,10 @@ export default function SeachInfo() {
                           type="number"
                           placeholder="Enter Mobile Number"
                           id="bride1-input1"
+                          maxLength={10}
+                          name="mobile"
+                          onChange={handleChange}
+                          value={inputs.mobile}
                         />
 
                         <p id="bride1-p">
@@ -1290,7 +1421,9 @@ export default function SeachInfo() {
                         </p>
                         <Link href="/Agarwal20">
                           <div className="text-center">
-                            <button id="bride1-btn1">Join Now</button>
+                            <button id="bride1-btn1" onClick={formSubmit}>
+                              Join Now
+                            </button>
                           </div>
                         </Link>
                       </div>
@@ -1352,6 +1485,9 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Profile Created By"
                           id="bride1-input"
+                          name="profile"
+                          onChange={handleChange}
+                          value={inputs.profile}
                         />
                         <br />
                         <span>Select Gender</span>
@@ -1381,6 +1517,9 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Name"
                           id="bride1-input"
+                          name="name"
+                          onChange={handleChange}
+                          value={inputs.name}
                         />
                         <br />
                         <span>Code</span>
@@ -1437,6 +1576,10 @@ export default function SeachInfo() {
                           type="number"
                           placeholder="Enter Mobile Number"
                           id="bride1-input1"
+                          maxLength={10}
+                          name="mobile"
+                          onChange={handleChange}
+                          value={inputs.mobile}
                         />
 
                         <p id="bride1-p">
@@ -1447,7 +1590,9 @@ export default function SeachInfo() {
                         </p>
                         <Link href="/Agarwal20">
                           <div className="text-center">
-                            <button id="bride1-btn1">Join Now</button>
+                            <button id="bride1-btn1" onClick={formSubmit}>
+                              Join Now
+                            </button>
                           </div>
                         </Link>
                       </div>
@@ -1509,6 +1654,9 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Profile Created By"
                           id="bride1-input"
+                          name="profile"
+                          onChange={handleChange}
+                          value={inputs.profile}
                         />
                         <br />
                         <span>Select Gender</span>
@@ -1538,6 +1686,9 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Name"
                           id="bride1-input"
+                          name="name"
+                          onChange={handleChange}
+                          value={inputs.name}
                         />
                         <br />
                         <span>Code</span>
@@ -1594,6 +1745,10 @@ export default function SeachInfo() {
                           type="number"
                           placeholder="Enter Mobile Number"
                           id="bride1-input1"
+                          maxLength={10}
+                          name="mobile"
+                          onChange={handleChange}
+                          value={inputs.mobile}
                         />
 
                         <p id="bride1-p">
@@ -1604,7 +1759,9 @@ export default function SeachInfo() {
                         </p>
                         <Link href="/Agarwal20">
                           <div className="text-center">
-                            <button id="bride1-btn1">Join Now</button>
+                            <button id="bride1-btn1" onClick={formSubmit}>
+                              Join Now
+                            </button>
                           </div>
                         </Link>
                       </div>
@@ -1666,6 +1823,9 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Profile Created By"
                           id="bride1-input"
+                          name="profile"
+                          onChange={handleChange}
+                          value={inputs.profile}
                         />
                         <br />
                         <span>Select Gender</span>
@@ -1695,6 +1855,9 @@ export default function SeachInfo() {
                           type="text"
                           placeholder="Name"
                           id="bride1-input"
+                          name="name"
+                          onChange={handleChange}
+                          value={inputs.name}
                         />
                         <br />
                         <span>Code</span>
@@ -1751,6 +1914,10 @@ export default function SeachInfo() {
                           type="number"
                           placeholder="Enter Mobile Number"
                           id="bride1-input1"
+                          maxLength={10}
+                          name="mobile"
+                          onChange={handleChange}
+                          value={inputs.mobile}
                         />
 
                         <p id="bride1-p">
@@ -1761,7 +1928,9 @@ export default function SeachInfo() {
                         </p>
                         <Link href="/Agarwal20">
                           <div className="text-center">
-                            <button id="bride1-btn1">Join Now</button>
+                            <button id="bride1-btn1" onClick={formSubmit}>
+                              Join Now
+                            </button>
                           </div>
                         </Link>
                       </div>

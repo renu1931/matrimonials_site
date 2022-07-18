@@ -189,9 +189,11 @@ export default function HomePage() {
                       </Link>
                     </div>
                   </div>
+
                   <button id="toggle-btn1" type="submit">
                     Login
                   </button>
+
                   <p id="toggle-or">OR</p>
                   <button id="toggle-btn2">Login With OTP</button>
                   <h6 id="toggle-shaddi">
